@@ -1,3 +1,4 @@
+const allContent = document.getElementById("all-content");
 const mainContent = document.getElementById("main-content");
 
 function checkGeolocationSupport() {
@@ -7,11 +8,10 @@ function checkGeolocationSupport() {
       errorOutput
     );
   } else {
-    body.innerHTML = "";
     const errorElement = document.createElement("h1");
     errorElement.innerText =
       "Sorry, but your browser doesn't support geolocation!";
-    body.append(errorElement);
+    mainContent.append(errorElement);
   }
 }
 
@@ -47,7 +47,6 @@ function getGeolocationWeatherCurrent(pos) {
             />
           </div>
         </header>`;
-      // body.append(html);
     });
 }
 
