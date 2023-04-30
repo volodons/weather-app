@@ -1,4 +1,4 @@
-body {
+#all-content {
   background-color: #4299e1;
   max-width: 1440px;
   min-height: 100vh;
@@ -9,7 +9,7 @@ body {
   justify-content: space-evenly;
 }
 
-main {
+#main-content {
   display: flex;
   flex-direction: column;
   color: #fff;

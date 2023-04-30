@@ -48,6 +48,81 @@ function getGeolocationWeatherCurrent(pos) {
           </div>
         </header>`;
     });
+  fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&units=metric&lang=en&cnt=5&appid=2c635de091adc7b86bb67624d5ba7e05`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      mainContent.innerHTML = `<section class="content">
+          <div class="content content__row">
+            <span>THU</span>
+            <img
+              src="./images/icon-broken-clouds.gif"
+              alt="Broken clouds"
+              title="Broken clouds"
+            />
+            <span>broken clouds</span>
+            <div class="content__column">
+              <span>-3°C</span>
+              <span>-8°C</span>
+            </div>
+          </div>
+          <div class="content content__row">
+            <span>FRI</span>
+            <img
+              src="./images/icon-light-rain.gif"
+              alt="Light rain"
+              title="Light rain"
+            />
+            <span>light rain</span>
+            <div class="content__column">
+              <span>3°C</span>
+              <span>-2°</span>
+            </div>
+          </div>
+          <div class="content content__row">
+            <span>SAT</span>
+            <img
+              src="./images/icon-light-rain.gif"
+              alt="Light rain"
+              title="Light rain"
+            />
+            <span>light rain</span>
+            <div class="content__column">
+              <span>6°C</span>
+              <span>2°C</span>
+            </div>
+          </div>
+          <div class="content content__row">
+            <span>SUN</span>
+            <img
+              src="./images/icon-light-rain.gif"
+              alt="Light rain"
+              title="Light rain"
+            />
+            <span>light rain</span>
+            <div class="content__column">
+              <span>3°C</span>
+              <span>-1°C</span>
+            </div>
+          </div>
+          <div class="content content__row">
+            <span>MON</span>
+            <img
+              src="./images/icon-light-rain.gif"
+              alt="Light rain"
+              title="Light rain"
+            />
+            <span>light rain</span>
+            <div class="content__column">
+              <span>6°C</span>
+              <span>4°C</span>
+            </div>
+          </div>
+        </section>`;
+    });
 }
 
 function errorOutput() {
