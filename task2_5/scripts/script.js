@@ -3,6 +3,7 @@
 const cityName = document.querySelector(".search-field");
 const searchForm = document.querySelector(".search-form");
 searchForm.addEventListener("submit", getWeatherByCityName);
+const searchResult = document.querySelector(".search-result");
 const header = document.querySelector(".header");
 const mainContent = document.querySelector(".main-content");
 
@@ -203,6 +204,7 @@ function getWeatherByCityName() {
           console.log(data);
           console.log(data.name);
           console.log(data.sys.country);
+          searchResult.innerText = `Selected: ${data.name}`;
           header.innerHTML = `<div class="header header__column">
             <span class="header__text--big-bold">${Math.round(
               data.main.temp

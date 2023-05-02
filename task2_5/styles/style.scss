@@ -1,8 +1,6 @@
 #all-content {
   background-color: #4299e1;
-  max-width: 1440px;
   min-height: 100vh;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +11,10 @@
   display: flex;
   flex-direction: column;
   color: #fff;
+}
+
+.search-result {
+  font-weight: bold;
 }
 
 .header {
