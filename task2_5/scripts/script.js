@@ -1,3 +1,5 @@
+"use strict";
+
 const allContent = document.getElementById("all-content");
 const mainContent = document.getElementById("main-content");
 
