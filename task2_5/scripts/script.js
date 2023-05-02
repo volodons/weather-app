@@ -1,7 +1,7 @@
 "use strict";
 
-const allContent = document.getElementById("all-content");
-const mainContent = document.getElementById("main-content");
+const header = document.querySelector(".header");
+const mainContent = document.querySelector(".main-content");
 
 function checkGeolocationSupport() {
   if (navigator.geolocation) {
@@ -28,8 +28,7 @@ function getGeolocationWeatherCurrent(pos) {
       console.log(data);
       console.log(data.name);
       console.log(data.sys.country);
-      mainContent.innerHTML = `<header class="header">
-          <div class="header header__column">
+      header.innerHTML = `<div class="header header__column">
             <span class="header__text--big-bold">${Math.round(
               data.main.temp
             )}°C</span>
@@ -47,83 +46,132 @@ function getGeolocationWeatherCurrent(pos) {
               alt="${data.weather[0].description}"
               title="${data.weather[0].description}"
             />
-          </div>
-        </header>`;
+          </div>`;
     });
   fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&units=metric&lang=en&cnt=5&appid=2c635de091adc7b86bb67624d5ba7e05`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&units=metric&lang=en&appid=2c635de091adc7b86bb67624d5ba7e05`
   )
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      mainContent.innerHTML = `<section class="content">
-          <div class="content content__row">
+      const day1Info = data.list.slice(0, 8);
+      const day2Info = data.list.slice(8, 16);
+      const day3Info = data.list.slice(16, 24);
+      const day4Info = data.list.slice(24, 32);
+      const day5Info = data.list.slice(32, 40);
+      console.log(day1Info);
+      console.log(day2Info);
+      console.log(day3Info);
+      console.log(day4Info);
+      console.log(day5Info);
+
+      const day1MinTemp = day1Info.reduce((prev, current) =>
+        prev.main.temp_min < current.main.temp_min ? prev : current
+      );
+      const day1MaxTemp = day1Info.reduce((prev, current) =>
+        prev.main.temp_max > current.main.temp_max ? prev : current
+      );
+      const day2MinTemp = day2Info.reduce((prev, current) =>
+        prev.main.temp_min < current.main.temp_min ? prev : current
+      );
+      const day2MaxTemp = day2Info.reduce((prev, current) =>
+        prev.main.temp_max > current.main.temp_min ? prev : current
+      );
+      const day3MinTemp = day3Info.reduce((prev, current) =>
+        prev.main.temp_min < current.main.temp_min ? prev : current
+      );
+      const day3MaxTemp = day3Info.reduce((prev, current) =>
+        prev.main.temp_max > current.main.temp_max ? prev : current
+      );
+      const day4MinTemp = day4Info.reduce((prev, current) =>
+        prev.main.temp_min < current.main.temp_min ? prev : current
+      );
+      const day4MaxTemp = day4Info.reduce((prev, current) =>
+        prev.main.temp_max > current.main.temp_max ? prev : current
+      );
+      const day5MinTemp = day5Info.reduce((prev, current) =>
+        prev.main.temp_min < current.main.temp_min ? prev : current
+      );
+      const day5MaxTemp = day5Info.reduce((prev, current) =>
+        prev.main.temp_max > current.main.temp_max ? prev : current
+      );
+
+      mainContent.innerHTML = `<div class="content content__row">
             <span>THU</span>
             <img
-              src="./images/icon-broken-clouds.gif"
-              alt="Broken clouds"
-              title="Broken clouds"
+              src="https://openweathermap.org/img/wn/${
+                day1MaxTemp.weather[0].icon
+              }@2x.png"
+              alt="${day1MaxTemp.weather[0].description}"
+              title="${day1MaxTemp.weather[0].description}"
             />
-            <span>broken clouds</span>
+            <span>${day1MaxTemp.weather[0].main}</span>
             <div class="content__column">
-              <span>-3°C</span>
-              <span>-8°C</span>
+              <span>${Math.round(day1MaxTemp.main.temp_max)}°C</span>
+              <span>${Math.round(day1MinTemp.main.temp_min)}°C</span>
             </div>
           </div>
           <div class="content content__row">
             <span>FRI</span>
             <img
-              src="./images/icon-light-rain.gif"
-              alt="Light rain"
-              title="Light rain"
+              src="https://openweathermap.org/img/wn/${
+                day2MaxTemp.weather[0].icon
+              }@2x.png"
+              alt="${day2MaxTemp.weather[0].description}"
+              title="${day2MaxTemp.weather[0].description}"
             />
-            <span>light rain</span>
+            <span>${day2MaxTemp.weather[0].main}</span>
             <div class="content__column">
-              <span>3°C</span>
-              <span>-2°</span>
+              <span>${Math.round(day2MaxTemp.main.temp_max)}°C</span>
+              <span>${Math.round(day2MinTemp.main.temp_min)}°C</span>
             </div>
           </div>
           <div class="content content__row">
             <span>SAT</span>
             <img
-              src="./images/icon-light-rain.gif"
-              alt="Light rain"
-              title="Light rain"
+              src="https://openweathermap.org/img/wn/${
+                day3MaxTemp.weather[0].icon
+              }@2x.png"
+              alt="${day3MaxTemp.weather[0].description}"
+              title="${day3MaxTemp.weather[0].description}"
             />
-            <span>light rain</span>
+            <span>${day3MaxTemp.weather[0].main}</span>
             <div class="content__column">
-              <span>6°C</span>
-              <span>2°C</span>
+              <span>${Math.round(day3MaxTemp.main.temp_max)}°C</span>
+              <span>${Math.round(day3MinTemp.main.temp_min)}°C</span>
             </div>
           </div>
           <div class="content content__row">
             <span>SUN</span>
             <img
-              src="./images/icon-light-rain.gif"
-              alt="Light rain"
-              title="Light rain"
+              src="https://openweathermap.org/img/wn/${
+                day4MaxTemp.weather[0].icon
+              }@2x.png"
+              alt="${day4MaxTemp.weather[0].description}"
+              title="${day4MaxTemp.weather[0].description}"
             />
-            <span>light rain</span>
+            <span>${day4MaxTemp.weather[0].main}</span>
             <div class="content__column">
-              <span>3°C</span>
-              <span>-1°C</span>
+              <span>${Math.round(day4MaxTemp.main.temp_max)}°C</span>
+              <span>${Math.round(day4MinTemp.main.temp_min)}°C</span>
             </div>
           </div>
           <div class="content content__row">
             <span>MON</span>
             <img
-              src="./images/icon-light-rain.gif"
-              alt="Light rain"
-              title="Light rain"
+              src="https://openweathermap.org/img/wn/${
+                day5MaxTemp.weather[0].icon
+              }@2x.png"
+              alt="${day5MaxTemp.weather[0].description}"
+              title="${day5MaxTemp.weather[0].description}"
             />
-            <span>light rain</span>
+            <span>${day5MaxTemp.weather[0].main}</span>
             <div class="content__column">
-              <span>6°C</span>
-              <span>4°C</span>
+              <span>${Math.round(day5MaxTemp.main.temp_max)}°C</span>
+              <span>${Math.round(day5MinTemp.main.temp_min)}°C</span>
             </div>
-          </div>
-        </section>`;
+          </div>`;
     });
 }
 
