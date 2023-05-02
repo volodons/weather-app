@@ -55,16 +55,18 @@ function getGeolocationWeatherCurrent(pos) {
       return response.json();
     })
     .then((data) => {
+      const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      const today = new Date();
+      const day1 = daysOfWeek[(today.getDate() + 1) % 7];
+      const day2 = daysOfWeek[(today.getDate() + 2) % 7];
+      const day3 = daysOfWeek[(today.getDate() + 3) % 7];
+      const day4 = daysOfWeek[(today.getDate() + 4) % 7];
+      const day5 = daysOfWeek[(today.getDate() + 5) % 7];
       const day1Info = data.list.slice(0, 8);
       const day2Info = data.list.slice(8, 16);
       const day3Info = data.list.slice(16, 24);
       const day4Info = data.list.slice(24, 32);
       const day5Info = data.list.slice(32, 40);
-      console.log(day1Info);
-      console.log(day2Info);
-      console.log(day3Info);
-      console.log(day4Info);
-      console.log(day5Info);
 
       const day1MinTemp = day1Info.reduce((prev, current) =>
         prev.main.temp_min < current.main.temp_min ? prev : current
@@ -98,7 +100,7 @@ function getGeolocationWeatherCurrent(pos) {
       );
 
       mainContent.innerHTML = `<div class="content content__row">
-            <span>THU</span>
+            <span>${day1}</span>
             <img
               src="https://openweathermap.org/img/wn/${
                 day1MaxTemp.weather[0].icon
@@ -113,7 +115,7 @@ function getGeolocationWeatherCurrent(pos) {
             </div>
           </div>
           <div class="content content__row">
-            <span>FRI</span>
+            <span>${day2}</span>
             <img
               src="https://openweathermap.org/img/wn/${
                 day2MaxTemp.weather[0].icon
@@ -128,7 +130,7 @@ function getGeolocationWeatherCurrent(pos) {
             </div>
           </div>
           <div class="content content__row">
-            <span>SAT</span>
+            <span>${day3}</span>
             <img
               src="https://openweathermap.org/img/wn/${
                 day3MaxTemp.weather[0].icon
@@ -143,7 +145,7 @@ function getGeolocationWeatherCurrent(pos) {
             </div>
           </div>
           <div class="content content__row">
-            <span>SUN</span>
+            <span>${day4}</span>
             <img
               src="https://openweathermap.org/img/wn/${
                 day4MaxTemp.weather[0].icon
@@ -158,7 +160,7 @@ function getGeolocationWeatherCurrent(pos) {
             </div>
           </div>
           <div class="content content__row">
-            <span>MON</span>
+            <span>${day5}</span>
             <img
               src="https://openweathermap.org/img/wn/${
                 day5MaxTemp.weather[0].icon
