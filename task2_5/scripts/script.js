@@ -2,26 +2,31 @@
 
 const cityName = document.querySelector(".search-field");
 const searchForm = document.querySelector(".search-form");
-searchForm.addEventListener("submit", getWeatherByCityName);
+searchForm.addEventListener("submit", getCityWeather);
 const searchResult = document.querySelector(".search-result");
 const header = document.querySelector(".header");
 const mainContent = document.querySelector(".main-content");
 
+/* Checks whether user's browser support geolocation and whether user agrees to share his geolocation */
 function checkGeolocationSupport() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      getGeolocationWeatherCurrent,
+      getGeolocationWeather,
       errorOutput
     );
   } else {
-    const errorElement = document.createElement("h1");
-    errorElement.innerText =
-      "Sorry, but your browser doesn't support geolocation!";
-    mainContent.append(errorElement);
+    searchResult.innerText =
+      "Sorry, but your browser doesn't support geolocation";
   }
 }
 
-function getGeolocationWeatherCurrent(pos) {
+// Outputs error in case user denies access to his geolocation data
+function errorOutput() {
+  searchResult.innerText = "Error: You denied access to your geolocation data";
+}
+
+// Gets weather data according to user's current location
+function getGeolocationWeather(pos) {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&units=metric&lang=en&appid=2c635de091adc7b86bb67624d5ba7e05`
   )
@@ -178,11 +183,8 @@ function getGeolocationWeatherCurrent(pos) {
     });
 }
 
-function errorOutput() {
-  console.log("Error!");
-}
-
-function getWeatherByCityName() {
+// Gets weather data according to city name
+function getCityWeather() {
   event.preventDefault();
   fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&limit=1&appid=2c635de091adc7b86bb67624d5ba7e05`
