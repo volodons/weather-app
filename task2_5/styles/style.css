@@ -20,6 +20,7 @@
 
 .header {
   display: flex;
+  align-items: center;
   column-gap: 1rem;
   padding: 0.5rem;
   background-color: #1a202c;
@@ -27,14 +28,14 @@
   border-top-right-radius: 5px;
 }
 
+.header__text--bold {
+  font-weight: bold;
+}
+
 .header__text--big-bold {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-}
-
-.header__text--bold {
-  font-weight: bold;
 }
 
 .header__column {
