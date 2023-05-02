@@ -29,9 +29,6 @@ function getGeolocationWeatherCurrent(pos) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(data.name);
-      console.log(data.sys.country);
       header.innerHTML = `<div class="header header__column">
             <span class="header__text--big-bold">${Math.round(
               data.main.temp
@@ -201,9 +198,6 @@ function getWeatherByCityName() {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          console.log(data.name);
-          console.log(data.sys.country);
           searchResult.innerText = `Selected: ${data.name}`;
           header.innerHTML = `<div class="header header__column">
             <span class="header__text--big-bold">${Math.round(
@@ -224,6 +218,10 @@ function getWeatherByCityName() {
               title="${data.weather[0].description}"
             />
           </div>`;
+        })
+        .catch(() => {
+          searchResult.innerText =
+            "Error: This city doesn't exist (or other problem occurred)";
         });
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&lang=en&appid=2c635de091adc7b86bb67624d5ba7e05`
@@ -351,7 +349,15 @@ function getWeatherByCityName() {
               <span>${Math.round(day5MinTemp.main.temp_min)}°C</span>
             </div>
           </div>`;
+        })
+        .catch(() => {
+          searchResult.innerText =
+            "Error: This city doesn't exist (or other problem occurred)";
         });
+    })
+    .catch(() => {
+      searchResult.innerText =
+        "Error: This city doesn't exist (or other problem occurred)";
     });
 }
 
