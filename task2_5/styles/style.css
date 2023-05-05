@@ -1,24 +1,26 @@
 #all-content {
   background-color: #4299e1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   row-gap: 2rem;
 }
 
 .all-content__wrapper {
-  width: 32rem;
+  width: 28rem;
   min-height: 100vh;
+  margin-top: 2rem;
 }
 
 .search-field {
+  width: 100%;
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-style: none;
   border-radius: 5px;
 }
 
 .search-result {
+  width: 100%;
   font-weight: bold;
 }
 
@@ -39,7 +41,6 @@
 .header__text--big-bold {
   font-size: 2rem;
   font-weight: bold;
-  text-align: center;
 }
 
 .header__column {
@@ -50,6 +51,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   color: #fff;
 }
 
