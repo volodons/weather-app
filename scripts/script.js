@@ -187,7 +187,7 @@ function getGeolocationWeather(pos) {
 function getCityWeather() {
   event.preventDefault();
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&limit=1&appid=2c635de091adc7b86bb67624d5ba7e05`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&limit=1&appid=2c635de091adc7b86bb67624d5ba7e05`
   )
     .then((response) => {
       return response.json();
