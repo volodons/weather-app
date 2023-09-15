@@ -1,4 +1,4 @@
-# World Countries Browser
+# Weather Widget
 
 ## Tech Stack
 
